@@ -6,6 +6,10 @@ var webpackPostprocessor = wallabyWebpack({
     'src/**/*spec.js'
   ],
 
+  resolve: {
+    modules: ['node_modules'] // <-- pointing to wallaby cache
+  },
+
   module: {
     loaders: [
       {test: /\.css$/, loader: 'raw-loader'},
@@ -26,6 +30,8 @@ module.exports = function (wallaby) {
 
   return {
     files: [
+      // <-- telling wallaby to compile the module
+      {pattern: 'node_modules/angular2-token/**/*.*', load: false, instrument: false},
       {pattern: 'src/**/*.ts', load: false},
       {pattern: 'src/**/*.d.ts', ignore: true},
       {pattern: 'src/**/*.css', load: false},
